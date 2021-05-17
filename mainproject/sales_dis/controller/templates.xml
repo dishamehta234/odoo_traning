@@ -1,0 +1,943 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Layout Before Login -->
+    <template id="home">
+        <t t-call="web.layout">        
+        <t t-call="sales_dis.header"/>
+        <t t-call="sales_dis.dashboard"/>
+        <t t-call="sales_dis.footer"/>
+        </t>
+    </template>
+
+    <!--******** Main Content ********-->
+    <template id="dashboard">
+        <div class="container">
+        <div class="mb-5 ml-5 mt-5">
+            <div class="row">
+                <div class="col-sm-6 mt-5">
+                    <h3><font color="Blue">Start Ordering Here</font> </h3><br></br>
+                    <h1><font color="Red">Have an Great Experience</font></h1><br></br>
+                   
+                    <button class="btn btn-dark" onClick="location.href='/signup'">Register Your Shop</button>
+                    <button class="btn btn-danger ml-3" onClick="location.href='/login'">Login</button>
+                </div>
+                <div class="col-sm-6">
+                    <img src="/sales_dis/static/images/g1.jpeg" class="img-fluid mt-2 rounded zoom" alt="Responsive image"/>
+                </div>   
+            </div>
+        </div>
+    </div>
+    </template>
+
+    <!--******** Main Content ********-->
+    <template id="header">
+        <t t-call="web.layout">        
+            <nav class="navbar navbar-expand-md  navbar-light bg-warning">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <t t-if="request.session.get('user_name')">
+                            <t t-if="request.session.get('role') == 'Shopper'">
+
+                                <a class="navbar-brand">SALES DISTRIBUTION</a>
+                                    <li class="nav-item active">
+                                       <button class="nav-link btn-info mr-2" onClick="location.href='/login_page'">Home</button>
+                                    </li>
+                                    <li class="nav-item">
+                                        <button class="nav-link btn-secondary text-white mr-2" onClick="location.href='/shopper_profile'">Profile</button>
+                                    </li>
+                                    <li class="nav-item">
+                                            <button class="nav-link btn-secondary text-white mr-2" onClick="location.href='/avl_product_shopper'">Available Product List</button>
+                                    </li>
+                                    <li class="nav-item">
+                                            <button class="nav-link btn-secondary text-white mr-2" onClick="location.href='/new_order'">Orders List</button>
+                                    </li>
+                                    <li class="nav-item">
+                                            <button class="nav-link btn-secondary text-white mr-2" onClick="location.href='/all_payment'">Payment List</button>
+                                    </li>
+                                    <li class="nav-item">
+                                        <button class="nav-link btn-secondary text-white ml-3" onClick="location.href='/logout'">Logout</button>
+                                    </li>
+                            </t>
+                            <t t-elif="request.session.get('role') == 'Sales Person'">
+
+                                <a class="navbar-brand">SALES DISTRIBUTION</a>
+                                    <li class="nav-item active">
+                                       <button class="nav-link btn-secondary text-white mr-2" onClick="location.href='/login_page'">Home</button>
+                                    </li>
+                                    <li class="nav-item">
+                                        <button class="nav-link btn-secondary text-white mr-2" onClick="location.href='/salesprofile'">Profile</button>
+                                    </li>
+                                    <li class="nav-item">
+                                            <button class="nav-link btn-secondary text-white mr-2" onClick="location.href='/day_list'">Day List</button>
+                                    </li>
+                                    <li class="nav-item">
+                                            <button class="nav-link btn-secondary text-white mr-2" onClick="location.href='/new_order'">New Orders</button>
+                                    </li>
+                                    <li class="nav-item">
+                                            <button class="nav-link btn-secondary text-white mr-2" onClick="location.href='/avl_product_sp'">Available Product List</button>
+                                    </li>
+                                    <li class="nav-item">
+                                            <button class="nav-link btn-secondary text-white mr-2" onClick="location.href='/all_payment'">Payment List</button>
+                                    </li>
+                                    <li class="nav-item">
+                                        <button class="nav-link btn-secondary text-white ml-3" onClick="location.href='/logout'">Logout</button>
+                                    </li>
+
+                            </t>
+                            <t t-else="request.session.get('role') == 'Admin'">
+
+                                <a class="navbar-brand">SALES DISTRIBUTION</a>
+                                    <li class="nav-item active">
+                                       <button class="nav-link btn-secondary text-white mr-2" onClick="location.href='/login_page'">Home</button>
+                                    </li>
+                                    <li class="nav-item">
+                                        <button class="nav-link btn-secondary text-white mr-2" onClick="location.href='/adminprofile'">Profile</button>
+                                    </li>
+                                    <li class="nav-item">
+                                            <button class="nav-link btn-secondary text-white mr-2" onClick="location.href='/add_sp'">Add New SP</button>
+                                    </li>
+                                    <li class="nav-item">
+                                            <button class="nav-link btn-secondary text-white mr-2" onClick="location.href='/add_product'">Add Product</button>
+                                    </li>
+                                    <li class="nav-item">
+                                            <button class="nav-link btn-secondary text-white mr-2" onClick="location.href='/avl_product_shopper'">Available Product List</button>
+                                    </li>
+                                    <li class="nav-item">
+                                            <button class="nav-link btn-secondary text-white mr-2" onClick="location.href='/add_zone'">Add Zone</button>
+                                    </li>
+                                    <li class="nav-item">
+                                            <button class="nav-link btn-secondary text-white mr-2" onClick="location.href='/all_sp'">List of SP</button>
+                                    </li>
+                                    <li class="nav-item">
+                                            <button class="nav-link btn-secondary text-white mr-2" onClick="location.href='/add_visiting_plan'">Visiting Plan</button>
+                                    </li>
+                                    <li class="nav-item">
+                                            <button class="nav-link btn-secondary text-white mr-2" onClick="location.href='/all_payment'">Payment List</button>
+                                    </li>
+                                    <li class="nav-item">
+                                        <button class="nav-link btn-secondary text-white ml-3" onClick="location.href='/logout'">Logout</button>
+                                    </li>
+
+                            </t>
+                        </t>
+                        <t t-else="">
+
+                            <a class="nloginavbar-brand">SALES DISTRIBUTION</a>
+                            <li class="nav-item active">
+                               <button class="nav-link btn-secondary text-white mr-2" onClick="location.href='/home'">Home</button>
+                            </li>
+                            <li class="nav-item">
+                                <button class="nav-link btn-secondary text-white mr-2" onClick="location.href='/login'">Login</button>
+                            </li>
+                            <li class="nav-item">
+                                <button class="nav-link btn-secondary text-white mr-2" onClick="location.href='/signup'">Signup</button>
+                            </li>
+                        </t>
+                    </ul> 
+                </div>
+            </nav>
+        </t>
+    </template>
+    <template id="footer">
+        <div>
+            <nav class="navbar navbar-expand-lg navbar-light mb-0 mt-5 fix-bottom" style="background-color: #e3f2fd;">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent" align="center">
+                    <h3 class="justify-content-center">@Sales Distribution System</h3>
+                </div>
+            </nav>
+        </div>
+    </template>
+    <template id="signup">
+        <t t-call="web.layout">
+            <t t-call="sales_dis.header">
+            </t>
+            <div class="container mt-5">
+                <h1>SignUp Here</h1>
+                <form action="/signup_submit" method="POST">
+                    <div id="customer">
+                        <h2 class="mb-3">Shopper Register</h2>
+                        <div class="form-group">
+                            <label for="fname">Name:</label>
+                            <input type="text" class="form-control" placeholder="Enter Name" name="fname" id="fname" required="true"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="unm">Email:</label>
+                            <input type="email" class="form-control" placeholder="Enter email" name="unm" id="unm" required="true"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="address">Address:</label>
+                            <input type="text" class="form-control" placeholder="Enter Address" name="address" id="address" required="true"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="mobno">Mobile Number:</label>
+                            <input type="text" class="form-control" placeholder="Enter Mobile Number" name="mobno" id="mobno" required="true"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="pass">Password:</label>
+                            <input type="password" t-model="state.pwd" t-on-keyup="_onKeyUpPwd" class="form-control" placeholder="Enter password" name="pass" id="pass" required="true"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="repwd">Re-Enter Password:</label>
+                            <input type="password" t-model="state.repwd" t-on-keyup="_onKeyUpRePwd" class="form-control" placeholder="Enter password" name="repwd" id="repwd" required="true"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="role">Role:</label>
+                            <input type="text" class="form-control" value="Shopper" name="role" id="role" required="true"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="sname">Shop Name:</label>
+                            <input type="text" class="form-control" placeholder="Enter Shop Name" name="sname" id="sname" required="true"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="sadd">Shop Address:</label>
+                            <input type="text" class="form-control" placeholder="Enter Shop Address" name="sadd" id="sadd" required="true"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="szone">Shop Zone:</label>
+                            <input type="text" class="form-control" placeholder="Enter Shop Zone" name="szone" id="szone" required="true"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="starget">Shop Target:</label>
+                            <input type="text" class="form-control" placeholder="Enter Monthly Target" name="starget" id="starget" required="true"/>
+                        </div>
+                        <div class="form-group">
+                            <label>Already Had An Account ??<br>
+                                <a href="/login">Login Here</a></br>
+                            </label>
+                        </div>
+                        <button type="submit" class="btn btn-secondary text-white ml-2">Register</button>
+                    </div>
+                </form>
+            </div>
+
+            <t t-call="sales_dis.footer">
+            </t>
+        </t>
+    </template>
+    <template id="login">
+        <t t-call="web.layout">
+        <t t-call="sales_dis.header">
+            </t>
+            <div>
+                <div class="container mt-5">
+                    <h1 class="mb-4">Login Here</h1>
+                    <form action="/login_submit"  method="POST">
+                        <div class="form-group">
+                            <label for="unm">Email address:</label>
+                            <input type="email" class="form-control" name="unm" placeholder="Enter email" id="unm" required="true"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="pass">Password:</label>
+                            <input type="password" class="form-control" name="pass" placeholder="Enter password" id="pass" required="true"/>
+                        </div>
+                        <button type="submit" class="btn btn-secondary text-white">Submit</button>
+                    </form>
+                </div>
+            </div>
+            <t t-call="sales_dis.footer">
+            </t>
+        </t>
+    </template>
+    <template id="login_page">
+        <t t-call="web.layout">
+            <t t-call="sales_dis.header">
+            </t>
+            <div>
+                <div class="mb-5 ml-5 mt-5">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <img src="/sales_dis/static/images/g5.jpeg" class="img-fluid mt-2 rounded zoom" alt="Responsive image" />
+                        </div>
+                        <div class="col-sm-6 mt-5">
+                            <h3><font color="Blue">Go With OnGoing Offers</font> </h3><br></br>
+                            <h1><font color="Red">Have an Great Experience</font></h1><br></br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <t t-call="sales_dis.footer">
+            </t>
+        </t>
+    </template>
+    <template id="add_product">
+        <t t-call="web.layout">
+            <t t-call="sales_dis.header">
+            </t>
+            <div class="container mt-5">
+                <form action="/product_submit" method="POST">
+                    <div id="product">
+                        <h2 class="mb-3">New Product</h2>
+                        <div class="form-group">
+                            <label for="pname">Product Name:</label>
+                            <input type="text" class="form-control" placeholder="Enter Product Name" name="pname" id="pname" required="true"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="price">Price:</label>
+                            <input type="text" class="form-control" placeholder="Enter Price" name="price" id="price" required="true"/>
+                        </div>
+                        <button type="submit" class="btn btn-secondary text-white ml-2">Add Product</button>
+                    </div>
+                </form>
+            </div>
+                
+            <t t-call="sales_dis.footer">
+            </t>
+        </t>
+    </template>
+    <template id="add_visiting_plan">
+        <t t-call="web.layout">
+            <t t-call="sales_dis.header">
+            </t>
+            <div class="container mt-5">
+                <form action="/visiting_submit" method="POST">
+                    <div id="product">
+                        <h2 class="mb-3">New Visiting plan</h2>
+                        <div class="form-group">
+                            <label for="pname">Visiting Day:</label>
+                            <input type="text" class="form-control" placeholder="Enter Day" name="day" id="pname" required="true"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="price">Zone Name:</label>
+                            <input type="text" class="form-control" placeholder="Enter Zone Name" name="zone" id="price" required="true"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="price">Shop Name:</label>
+                            <input type="text" class="form-control" placeholder="Enter Shop Name" name="shopnm" id="price" required="true"/>
+                        </div>
+                        <button type="submit" class="btn btn-secondary text-white ml-2">Add</button>
+                    </div>
+                </form>
+            </div>
+                
+            <t t-call="sales_dis.footer">
+            </t>
+        </t>
+    </template>
+    <template id="add_sp">
+        <t t-call="web.layout">
+             <t t-call="sales_dis.header">
+            </t>
+            <div class="container mt-5">
+                <h1>Add New Sales Person</h1>
+                <form action="/sp_submit" method="POST">
+                    <div id="customer">
+                        <div class="form-group">
+                            <label for="sname">Name:</label>
+                            <input type="text" class="form-control" placeholder="Enter Name" name="sname" id="sname" required="true"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="s_unm">Email:</label>
+                            <input type="email" class="form-control" placeholder="Enter email" name="s_unm" id="s_unm" required="true"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="s_address">Address:</label>
+                            <input type="text" class="form-control" placeholder="Enter Address" name="s_address" id="s_address" required="true"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="s_mobno">Mobile Number:</label>
+                            <input type="text" class="form-control" placeholder="Enter Mobile Number" name="s_mobno" id="s_mobno" required="true"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="s_pass">Password:</label>
+                            <input type="password" t-model="state.pwd" t-on-keyup="_onKeyUpPwd" class="form-control" placeholder="Enter password" name="s_pass" id="s_pass" required="true"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="s_repwd">Re-Enter Password:</label>
+                            <input type="password" t-model="state.repwd" t-on-keyup="_onKeyUpRePwd" class="form-control" placeholder="Enter password" name="s_repwd" id="s_repwd" required="true"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="s_role">Role:</label>
+                            <input type="text" class="form-control" value="Sales Person" name="s_role" id="s_role" required="true"/>
+                        </div>
+                        <button type="submit" class="btn btn-secondary text-white ml-2">Register</button>
+                    </div>
+                </form>
+            </div>
+            <t t-call="sales_dis.footer">
+            </t>
+        </t>
+    </template>
+
+    <template id="all_sp">
+        <t t-call="web.layout">
+            <t t-call="sales_dis.header">
+            </t>
+            <div class="container">
+                <div class="mt-5 mb-5">
+                    <h1>Details of Sales Person</h1> 
+                </div>
+                <div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Address</th>
+                                <th>Mobile Number</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="allsp" t-as="allsp">
+                                <tr>
+                                    <td><t t-esc="allsp.name"/></td>
+                                    <td><t t-esc="allsp.email"/></td>
+                                    <td><t t-esc="allsp.address"/></td>
+                                    <td><t t-esc="allsp.mobno"/></td>
+                                    <td><a class="btn btn-warning" t-att-href="'/delete/%s' % allsp.id">Remove</a></td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <t t-call="sales_dis.footer">
+            </t>
+        </t>
+    </template>
+    <template id="add_zone">
+        <t t-call="web.layout">
+            <t t-call="sales_dis.header">
+            </t>
+            <div class="container mt-5">
+                <form action="/zone_submit" method="POST">
+                    <div id="product">
+                        <h2 class="mb-3">Add New Zone</h2>
+                        <div class="form-group">
+                            <label for="zname">Zone Name:</label>
+                            <input type="text" class="form-control" placeholder="Enter Zone Name" name="zname" id="zname" required="true"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="zarea">Zone Area:</label>
+                            <input type="text" class="form-control" placeholder="Enter Zone Area" name="zarea" id="zarea" required="true"/>
+                        </div>
+                        <button type="submit" class="btn btn-secondary text-white ml-2">Add Zone</button>
+                    </div>
+                </form>
+            </div>
+                
+            <t t-call="sales_dis.footer">
+            </t>
+        </t>
+    </template>
+    <template id="salesprofile">
+        <t t-call="web.layout">
+            <t t-call="sales_dis.header">
+            </t>
+                <div class="d-flex justify-content-center mt-5">
+                    <div class="card text-center" style="width:35em;">
+                        <div class="card-header">
+                            Sales Person Profile
+                        </div>
+                        <div class="card-body">
+                            <table style="width:100%">
+                                <t t-foreach="sales" t-as="sale">
+                                    <tr>
+                                        <th>Name:</th>
+                                        <td><t t-esc="sale.name"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Email:</th>
+                                        <td><t t-esc="sale.email"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Address:</th>
+                                        <td><t t-esc="sale.address"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Mobile:</th>
+                                        <td><t t-esc="sale.mobno"/></td>
+                                    </tr>
+                                </t>
+                            </table>
+                        </div>
+                        <div class="card-footer text-muted">
+                        </div>
+                    </div>
+                </div>            <t t-call="sales_dis.footer">
+            </t>
+        </t>
+    </template>
+    <template id="shopper_profile">
+        <t t-call="web.layout">
+            <t t-call="sales_dis.header">
+            </t>
+                <div class="d-flex justify-content-center mt-5">
+                    <div class="card text-center" style="width:35em;">
+                        <div class="card-header">
+                            Sales Person Profile
+                        </div>
+                        <div class="card-body">
+                            <table style="width:100%">
+                                <t t-foreach="shoppers" t-as="shopper">
+                                    <tr>
+                                        <th>Name:</th>
+                                        <td><t t-esc="shopper.name"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Email:</th>
+                                        <td><t t-esc="shopper.email"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Address:</th>
+                                        <td><t t-esc="shopper.address"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Mobile:</th>
+                                        <td><t t-esc="shopper.mobno"/></td>
+                                    </tr>
+                                </t>
+                            </table>
+                        </div>
+                        <div class="card-footer text-muted">
+                        </div>
+                    </div>
+                </div>            
+            <t t-call="sales_dis.footer">
+            </t>
+        </t>
+    </template>
+    <template id="adminprofile">
+        <t t-call="web.layout">
+            <t t-call="sales_dis.header">
+            </t>
+                <div class="d-flex justify-content-center mt-5">
+                    <div class="card text-center" style="width:35em;">
+                        <div class="card-header">
+                            My Profile
+                        </div>
+                        <div class="card-body">
+                            <table style="width:100%">
+                                <t t-foreach="admins" t-as="admin">
+                                    <tr>
+                                        <th>Name:</th>
+                                        <td><t t-esc="admin.name"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Email:</th>
+                                        <td><t t-esc="admin.email"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Address:</th>
+                                        <td><t t-esc="admin.address"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Mobile:</th>
+                                        <td><t t-esc="admin.mobno"/></td>
+                                    </tr>
+                                </t>
+                            </table>
+                        </div>
+                        <div class="card-footer text-muted">
+                        </div>
+                    </div>
+                </div>            
+            <t t-call="sales_dis.footer">
+            </t>
+        </t>
+    </template>
+
+    <template id="avl_product_shopper">
+        <t t-call="web.layout">
+            <t t-call="sales_dis.header">
+            </t>
+                    <div class="container">  
+                    <div class="mt-5 mb-5">
+                        <h1>List of Available products </h1> 
+                    </div>
+                    <div>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Product id</th>
+                                    <th>Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="products" t-as="product">
+                                    <tr>
+                                        <td><t t-esc="product.id"/></td>
+                                        <td><t t-esc="product.p_name"/></td>
+                                        <td><t t-esc="product.p_price"/></td>
+                                        <td><a class="btn btn-warning" t-att-href="'/delete_prd/%s' % product.id">Remove</a></td>
+
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- <div align="right">
+                        <button class="btn btn-primary mr-2" href="#" t-on-click="loginhome()">Back</button>
+                    </div> -->
+                </div>
+            <t t-call="sales_dis.footer">
+            </t>
+        </t>
+    </template>
+
+    <template id="avl_product_sp">
+        <t t-call="web.layout">
+            <t t-call="sales_dis.header">
+            </t>
+                    <div class="container">  
+                    <div class="mt-5 mb-5">
+                        <h1>List of Available products </h1> 
+                    </div>
+                    <div>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Product id</th>
+                                    <th>Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="products_sp" t-as="product">
+                                    <tr>
+                                        <td><t t-esc="product.id"/></td>
+                                        <td><t t-esc="product.p_name"/></td>
+                                        <td><t t-esc="product.p_price"/></td>
+                                        <td><a class="btn btn-primary" t-att-href="'/order/%s' % product.id">Order</a></td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- <div align="right">
+                        <button class="btn btn-primary mr-2" href="#" t-on-click="loginhome()">Back</button>
+                    </div> -->
+                </div>
+            <t t-call="sales_dis.footer">
+            </t>
+        </t>
+    </template>
+
+    <template id="all_payment">
+        <t t-call="web.layout">
+            <t t-call="sales_dis.header">
+            </t>
+            <div class="container">
+                <div class="mt-5 mb-5">
+                    <h1>Details of Payments</h1> 
+                </div>
+                <div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Product No</th>
+                                <th>Amount</th>
+                                <th>Method</th>
+                                <th>Cheque No</th>
+                                <th>Bank Name</th>
+                                <th>Remark</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="all_payment" t-as="all_payment">
+                                <tr>
+                                    <td><t t-esc="all_payment.P_id"/></td>
+                                    <td><t t-esc="all_payment.p_amount"/></td>
+                                    <td><t t-esc="all_payment.p_mthd"/></td>
+                                    <td><t t-esc="all_payment.cheque_no"/></td>
+                                    <td><t t-esc="all_payment.bank_name"/></td>
+                                    <td><t t-esc="all_payment.p_remark"/></td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <t t-call="sales_dis.footer">
+            </t>
+        </t>
+    </template>
+    <template id="do_payment">
+        <t t-call="web.layout">
+            <t t-call="sales_dis.header">
+            </t>
+                <div class="container">
+                    <div class="d-flex justify-content-center h-100">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 align="center">Payment</h3>
+                            </div>
+                            <div class="card-body">
+                                <h3 align="center">Payment</h3>
+                                <div class="d-flex justify-content-center links">
+                                    see previous payments <a href="#">See List</a>
+                                </div>
+                                <p>Choose any Payment Method Either Cash or Cheque</p>
+                                <div class="panel-group">
+                                    <t t-esc="order_id">
+                                    </t>
+                                    <a class="btn btn-primary" onClick="location.href='/payment_by_cash'">Pay By Cash</a>
+                                    <a class="btn btn-primary" onClick="location.href='/payment_by_cheque'">Pay By Cheque</a>
+                                </div>                  
+                                <div align="right">
+                                    <button class="btn btn-primary mr-2 onClick=location.href='/login_page'">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <t t-call="sales_dis.footer">
+            </t>
+        </t>
+    </template>
+    <template id="payment_by_cash">
+        <t t-call="web.layout">
+            <t t-call="sales_dis.header">
+            </t>
+            <div class="card d-flex justify-content-center">
+                <div class="card-header">
+                    <h3 align="center">Payment</h3>
+                </div>
+                <div class="card-body">
+                    <form action="/pay_cash" method="POST">                
+                        <div id="paycash">
+                            <h4><b>Payment By Cash</b></h4>
+                            <div class="form-group">
+                                <label for="cars">Enter Amount :</label>
+                                <input type="text" class="form-control" name="amount" placeholder="Enter Amount" id="Amount"/>  
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary" >Cash</button>
+                                <button class="btn btn-primary mr-2" onClick="location.href='/login_page'">Back</button>
+                            </div>
+                        </div>  
+                    </form>
+                </div>
+            </div>
+            <t t-call="sales_dis.footer">
+            </t>
+        </t>
+    </template>
+
+    <template id="payment_by_cheque">
+        <t t-call="web.layout">
+            <t t-call="sales_dis.header">
+            </t>
+            <div class="card d-flex justify-content-center">
+                <div class="card-header">
+                    <h3 align="center">Payment</h3>
+                </div>
+                <div class="card-body">
+                    <form action="/pay_cheque">                
+                        <div class="hideRadio" id="paycheque">
+                            <h4><b>Payment By Cheque</b></h4>
+                            <div class="form-group">
+                                <p><u>Fill Information</u></p>
+                                <input type="text" name="cheque" placeholder="check Number" id="cqnum"/>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" name="bankname" placeholder="Bank Name" id="bank"/>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" name="amount" placeholder="Amount" id="amnt"/>  
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">Cheque</button>
+                                <button class="btn btn-primary mr-2" onClick="location.href='/login_page'">Back</button>
+                            </div>
+                        </div> 
+                    </form>
+                </div>
+            </div>
+            <t t-call="sales_dis.footer">
+            </t>
+        </t>
+    </template>
+    <template id="payment_list">
+        <t t-call="web.layout">
+            <t t-call="sales_dis.header">
+            </t>
+                <div class="d-flex justify-content-center mt-5">
+                    <div class="card text-center" style="width:35em;">
+                        <div class="card-header">
+                            My Profile
+                        </div>
+                        <div class="card-body">
+                            <table style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>Product id</th>
+                                        <th>Payment Method</th>
+                                        <th>Amount</th>
+                                        <th>Cheque No</th>
+                                        <th>Bank Name</th>
+                                         <th>Remark</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="payments" t-as="payment">
+                                        <tr>
+                                            <td><t t-esc="payment.P_id"/></td>
+                                            <td><t t-esc="payment.p_mthd"/></td>
+                                            <td><t t-esc="payment.p_amount"/></td>
+                                            <td><t t-esc="payment.cheque_no"/></td>
+                                            <td><t t-esc="payment.bank_name"/></td>
+                                            <td><t t-esc="payment.p_remark"/></td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="card-footer text-muted">
+                        </div>
+                    </div>
+                </div>            
+            <t t-call="sales_dis.footer">
+            </t>
+        </t>
+    </template>
+    <template id="collect_cheque">
+        <t t-call="web.layout">
+            <t t-call="sales_dis.header">
+            </t>
+                <div class="d-flex justify-content-center mt-5">
+                    <div class="card text-center" style="width:35em;">
+                        <div class="card-header">
+                            My Profile
+                        </div>
+                        <div class="card-body">
+                            <t t-if="request.session.get('role') == 'Shopper'">
+                                <table style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th>Product id</th>
+                                            <th>Payment Method</th>
+                                            <th>Amount</th>
+                                            <th>Cheque No</th>
+                                            <th>Bank Name</th>
+                                             <th>Remark</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <t t-foreach="payments" t-as="payment">
+                                            <tr>
+                                                <td><t t-esc="payment.P_id"/></td>
+                                                <td><t t-esc="payment.p_mthd"/></td>
+                                                <td><t t-esc="payment.p_amount"/></td>
+                                                <td><t t-esc="payment.cheque_no"/></td>
+                                                <td><t t-esc="payment.bank_name"/></td>
+                                                <td><t t-esc="payment.p_remark"/></td>
+                                            </tr>
+                                        </t>
+                                    </tbody>
+                                </table>
+                            </t>
+                        </div>
+                        <div class="card-footer text-muted">
+                        </div>
+                    </div>
+                </div>            
+            <t t-call="sales_dis.footer">
+            </t>
+        </t>
+    </template>
+
+    <template id="new_order">
+        <t t-call="web.layout">
+            <t t-call="sales_dis.header">
+            </t>
+            <div class="container">  
+                <div class="mt-5 mb-5">
+                    <h1>List of New Order </h1> 
+                </div>
+                <div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Product Name</th>
+                                <th>Order Status</th>
+                                <th>Payment Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="orders" t-as="order">
+                                <tr>
+                                    <td><t t-esc="order.p_name"/></td>
+                                    <td><t t-esc="order.o_status"/></td>
+                                    <td><t t-esc="order.o_payment_status"/></td>
+                                    <td><a class="btn btn-primary" t-att-href="'/payment/%s' % order.id">Payment</a></td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+                <div align="right">
+                    <button class="nav-link btn-primary text-white mr-2" onClick="location.href='/completed_order'">Completed Orders</button>
+                    <!-- <button class="btn btn-primary mr-2" href="#" t-on-click="loginhome">Back</button> -->
+                </div>
+            </div>
+            <t t-call="sales_dis.footer">
+            </t>
+        </t>
+    </template>
+    <template id="completed_order">
+        <t t-call="web.layout">
+            <t t-call="sales_dis.header">
+            </t>
+            <div class="container">  
+                <div class="mt-5 mb-5">
+                    <h1>List of Completed Orders </h1> 
+                </div>
+                <div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Product Name</th>
+                                <th>Order Status</th>
+                                <th>Payment Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="orders" t-as="order">
+                                <tr>
+                                    <td><t t-esc="order.p_name"/></td>
+                                    <td><t t-esc="order.o_status"/></td>
+                                    <td><t t-esc="order.o_payment_status"/></td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <t t-call="sales_dis.footer">
+            </t>
+        </t>
+    </template>
+    <template id="day_list">
+        <t t-call="web.layout">
+            <t t-call="sales_dis.header">
+            </t>
+            <div class="container">  
+                <div class="mt-5 mb-5">
+                    <h1>List of Visiting Days </h1> 
+                </div>
+                <div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Day</th>
+                                <th>Zone Name</th>
+                                <th>Shop Name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="days" t-as="day">
+                                <tr>
+                                    <td><t t-esc="day.visiting_day"/></td>
+                                    <td><t t-esc="day.z_name"/></td>
+                                    <td><t t-esc="day.shop_name"/></td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <t t-call="sales_dis.footer">
+            </t>
+        </t>
+    </template>
+</odoo>

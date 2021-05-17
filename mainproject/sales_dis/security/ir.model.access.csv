@@ -1,0 +1,10 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_users,access_users,model_users,base.group_user,1,1,1,1
+access_sal_per,access_sal_per,model_sal_per,base.group_user,1,1,1,1
+access_shop_visit,access_shop_visit,model_shop_visit,base.group_user,1,1,1,1
+access_prdct,access_prdct,model_prdct,base.group_user,1,1,1,1
+access_order,access_order,model_order,base.group_user,1,1,1,1
+access_payment,access_payment,model_payment,base.group_user,1,1,1,1
+access_zone,access_zone,model_zone,base.group_user,1,1,1,1
+access_visiting_plan,access_visiting_plan,model_visiting_plan,base.group_user,1,1,1,1
+access_admin,access_admin,model_admin,base.group_user,1,1,1,1
