@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="college_view_tree" model="ir.ui.view">
+		<field name="name">College.tree</field>
+		<field name="model">college</field>
+		<field name="arch" type="xml">
+			<tree string="College_List">
+				<field name="email"/>
+				<field name="name"/>
+				<field name="city"/>
+				<field name="conact_no"/>
+				<field name="streams"/>
+				<field name="current_date"/>
+				<field name="image" widget='image' class="oe_left oe_avatar" options='{"size": [90, 90]}'/>
+				<field name="student_no"/>
+				<field name="student"/>
+				<field name="fees"/>
+				<field name="faculty" widget="many2many_tags"/>
+			</tree>
+		</field>
+	</record>
+
+	<record id="college_view_calender" model="ir.ui.view">
+        <field name="name">College.Calendar</field>
+        <field name="model">college</field>
+        <field name="arch" type="xml">
+            <calendar date_start="current_date" color="name">
+                <field name="email"/>
+				<field name="name"/>
+				<field name="city"/>
+				<field name="conact_no"/>
+				<field name="streams"/>
+            </calendar>
+        </field>
+    </record>
+    <record id="college_gantt" model="ir.ui.view">
+        <field name="name">College.gantt</field>
+        <field name="model">college</field>
+        <field name="arch" type="xml">
+            <gantt date_start="birthday" date_stop="current_date">
+            </gantt>
+        </field>
+    </record>
+	<record id="college_form" model="ir.ui.view">
+		<field name="name">college Form</field>
+		<field name="model">college</field>
+		<field name="arch" type="xml">
+			<form string="college Form">
+				<sheet>
+					<notebook>
+						<page string="College Details">
+							<group>
+								<field name="email"/>
+								<field name="name"/>
+								<field name="city"/>
+								<field name="conact_no"/>
+								<field name="streams"/>
+								<field name="student_no"/>
+								<field name="student"/>
+								<field name="image" widget='image' class="oe_left oe_avatar" options='{"size": [90, 90]}'/>
+							</group>
+						</page>
+						<page string="Faculty Details">
+							<group>
+								<field name="faculty" widget="many2many_tags"/>
+							</group>
+						</page>
+						<page string="Student Details">
+							<group>
+								<field name="student"/>
+							</group>
+						</page>
+					</notebook>
+				</sheet>
+			</form>
+		</field>
+	</record>
+	<record id="college_kanban_view" model="ir.ui.view">
+        <field name="name">College.kanban</field>
+        <field name="model">college</field>
+        <field name="arch" type="xml">
+            <kanban class="college.kanban">
+                <field name="email"/>
+				<field name="name"/>
+				<field name="city"/>
+				<field name="conact_no"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_global_click">
+                            <div>
+                                <img class="rounded-circle mt-1 o_portal_contact_img" src="/web/static/src/img/user_menu_avatar.png" alt="Contact"/>
+
+                                <strong class="o_kanban_record_title"><field name="name"/></strong>
+                           	</div>
+                            <div>
+                               	<ul>
+                                	<li>email: <field name="email"/></li>
+                                	<li>city: <field name="city"/></li>
+                               		<li>Mobile No: <field name="conact_no"/></li>
+                              	</ul>
+                           	</div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="college_graph" model="ir.ui.view">
+        <field name="name">College.graph</field>
+        <field name="model">college</field>
+        <field name="arch" type="xml">
+            <graph>
+                <field name="name"/>
+                <field name="student_no" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="college_pivot" model="ir.ui.view">
+        <field name="name">College.pivot</field>
+        <field name="model">college</field>
+        <field name="arch" type="xml">
+            <pivot>
+                <field name="name" type="row"/>
+                <field name="city" type="row"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="college_search_view" model="ir.ui.view">
+		<field name="name">Search view</field>
+		<field name="model">college</field>
+		<field name="arch" type="xml">
+			<search string="College search">
+				<field name="name"  filter_domain="['|',('name', 'ilike', self),('email', 'ilike',self)]"/>
+			</search>
+		</field>
+	</record>
+
+
+	<record id="Faculty_view_tree" model="ir.ui.view">
+		<field name="name">faculty.tree</field>
+		<field name="model">college.faculty</field>
+		<field name="arch" type="xml">
+			<tree>
+				<field name="faculty_name"/>
+				<field name="faculty_branch"/>
+				<field name="clg_record"/>
+			</tree>
+		</field>
+	</record>
+
+	<record id="Faculty_form" model="ir.ui.view">
+		<field name="name">Faculty Form</field>
+		<field name="model">college.faculty</field>
+		<field name="arch" type="xml">
+			<form string="Faculty Form">
+				<sheet>
+					<notebook>
+						<page string="Faculty Details">
+							<group>
+								<field name="faculty_name"/>
+								<field name="email"/>
+								<field name="faculty_branch"/>
+								<field name="city"/>
+								<field name="conact_no"/>
+								<field name="image" widget='image' class="oe_left oe_avatar" options='{"size": [90, 90]}'/>
+								<field name="clg_record"/>
+							</group>
+						</page>
+					</notebook>
+				</sheet>
+			</form>
+		</field>
+	</record>
+	<record id="Student_view_tree" model="ir.ui.view">
+		<field name="name">faculty.tree</field>
+		<field name="model">college.student</field>
+		<field name="arch" type="xml">
+			<tree>
+				<field name="name"/>
+				<field name="birthday"/>
+				<field name="gender"/>
+				<field name="email"/>
+				<field name="age"/>
+				<field name="mobile_no"/>
+				<field name="image" widget='image' class="oe_left oe_avatar" options='{"size": [90, 90]}'/>
+				<field name=""/>
+			</tree>
+		</field>
+	</record>
+	<record id="Student_form" model="ir.ui.view">
+		<field name="name">student Form</field>
+		<field name="model">college.student</field>
+		<field name="arch" type="xml">
+			<form string="student Form">
+				<sheet>
+					<notebook>
+						<page string="Students Details">
+							<group>
+								<field name="name"/>
+								<field name="birthday"/>
+								<field name="gender"/>
+								<field name="email"/>
+								<field name="age"/>
+								<field name="mobile_no"/>
+								<field name="image" widget='image' class="oe_left oe_avatar" options='{"size": [90, 90]}'/>
+							</group>
+						</page>
+					</notebook>
+				</sheet>
+			</form>
+		</field>
+	</record>
+
+	<record id="College_action" model="ir.actions.act_window">
+		<field name="name">College</field>
+		<field name="res_model">college</field>
+		<field name="view_mode">tree,calendar,form,kanban,graph,pivot,search,gantt</field> 
+	</record>
+
+	<record id="Faculty_action" model="ir.actions.act_window">
+		<field name="name">Faculty</field>
+		<field name="res_model">college.faculty</field>
+		<field name="view_mode">tree,form</field> 
+	</record>
+
+	<record id="Student_action" model="ir.actions.act_window">
+		<field name="name">Student</field>
+		<field name="res_model">college.student</field>
+		<field name="view_mode">tree,form</field> 
+	</record>
+
+
+	<menuitem id="College_menu" name="College Data"/>
+	<menuitem id="College" name="Details" sequence="1" action="College_action" parent="College_menu"/>
+	<menuitem id="Faculty_menu" name="Faculty menu" action="Faculty_action" parent="College_menu"/>
+	<menuitem id="Student_menu" name="Student menu" action="Student_action" parent="College_menu"/>
+</odoo>

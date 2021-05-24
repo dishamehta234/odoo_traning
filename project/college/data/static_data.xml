@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="clg1" model="college">
+            <field name="name">MJSB</field>
+            <field name="email">mjsb@gmail.com</field>
+            <field name="city">Bhuj</field>
+            <field name="conact_no">89567524</field>
+           <!--  <field name="streams">BCA</field>
+            <field name="student_no">100</field> -->
+            <field name="fees">4000</field>
+        </record>
+       <!--  <record id="clg2" model="college">
+            <field name="name">Commerce College</field>
+            <field name="email">cc@gmail.com</field>
+            <field name="city">Bhuj</field>
+            <field name="conact_no">89567524</field>
+           <field name="streams">BCom</field>
+            <field name="student_no">400</field> 
+            <field name="fees">2000</field>
+        </record>
+        <record id="clg3" model="college">
+            <field name="name">Lalan College</field>
+            <field name="email">lalan@gmail.com</field>
+            <field name="city">Bhuj</field>
+            <field name="conact_no">89567524</field>
+            <field name="streams">BA</field>
+            <field name="student_no">700</field>
+            <field name="fees">1500</field>
+        </record> -->
+    </data>
+</odoo>

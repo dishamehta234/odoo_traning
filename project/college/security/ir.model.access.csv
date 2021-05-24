@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_college,access_college,model_college,base.group_user,1,1,1,1
+access_college_faculty,access_college_faculty,model_college_faculty,base.group_user,1,1,1,1
+access_college_student,access_college_student,model_college_student,base.group_user,1,1,1,1
+access_faculty_update,access_faculty_update,model_faculty_update,base.group_user,1,1,1,1
+

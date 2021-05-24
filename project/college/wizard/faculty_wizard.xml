@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="faculty_wizard_form" model="ir.ui.view">
+		<field name="name">faculty.wizard.form</field>
+		<field name="model">faculty.update</field>
+		<field name="arch" type="xml">
+			<form string="faculty Form">
+				<sheet>
+					<notebook>
+						<page string="Faculty Details">
+							<field name="faculty_name"/>
+						</page>
+					</notebook>
+					<footer>
+						<button name="faculty_wizard_action" string="Add Faculty" type="object" class="btn btn-primary"/>
+						<button  string="Cancel" special="cancel" class="btn btn-info" />
+					</footer>
+				</sheet>
+			</form>
+		</field>
+	</record>
+
+	<record id="faculty_wizard_action" model="ir.actions.act_window">
+		<field name="name">add faculty</field>
+		<field name="res_model">faculty.update</field>
+		<field name="view_mode">form</field>
+		<field name="binding_model_id" ref="model_college"/>
+		<field name="target">new</field>
+	</record>
+
+</odoo>
